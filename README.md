@@ -10,4 +10,4 @@ Usa volumes para manter os dados persistentes.
 Mapeia portas locais para facilitar acesso.
 
 Faz tudo isso de forma orquestrada com um simples comando:
-- docker-compose up -d
+- docker compose up 
