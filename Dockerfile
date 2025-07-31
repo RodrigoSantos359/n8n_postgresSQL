@@ -15,3 +15,4 @@ EXPOSE 5678
 
 # Inicia com o tunnel
 CMD ["n8n", "start", "--tunnel"]
+# tests
