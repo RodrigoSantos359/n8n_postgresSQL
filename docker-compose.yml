@@ -15,8 +15,12 @@ services:
       - postgres_data:/var/lib/postgresql/data
 
   n8n:
+<<<<<<< HEAD
     build:
       context: .
+=======
+    image: n8nio/n8n:stable
+>>>>>>> ff3a265d3bcd528678d4cc3580dd2aa7a4ce176f
     container_name: n8n
     restart: always
     ports:
