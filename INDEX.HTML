@@ -1,0 +1,203 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>TB MANAUS — Versão HTML (único arquivo)</title>
+<meta name="description" content="Versão HTML fiel ao PDF — cabeçalho e rodapé não editáveis; áreas editáveis indicadas.">
+<style>
+  /* Reset e fonte */
+  :root{--page-width:794px; --page-height:1123px; --content-w:720px; --accent:#0b6b8f;}
+  html,body{height:100%;margin:0;padding:0;font-family: "Helvetica Neue", Arial, sans-serif;background:#ddd;}
+  .paper { width:var(--page-width); margin:24px auto; background:white; box-shadow:0 8px 28px rgba(0,0,0,0.25); position:relative; }
+
+  /* Cabeçalho e rodapé fixos (imagens) */
+  header.pdf-header, footer.pdf-footer {
+    width:100%;
+    position:absolute;
+    left:0;
+    background-repeat:no-repeat;
+    background-size:cover;
+    pointer-events:none; /* tornam não editáveis na interface */
+  }
+  header.pdf-header { top:0; height:100px; } /* ajuste conforme seu PDF */
+  footer.pdf-footer { bottom:0; height:88px; } /* ajuste conforme seu PDF */
+
+  /* Área de conteúdo central com margens para header/footer */
+  .sheet {
+    padding:120px 42px 110px 42px; /* espaço para header e footer */
+    box-sizing:border-box;
+    min-height: var(--page-height);
+  }
+
+  /* Estilos de texto (procurei reproduzir layout de relatório técnico) */
+  h1{font-size:18px;color:var(--accent);margin:0 0 6px;}
+  h2{font-size:15px;color:#0a4e62;margin:16px 0 6px;}
+  h3{font-size:13px;margin:6px 0;}
+  p{font-size:12.5px;line-height:1.45;margin:8px 0;color:#222;}
+  .muted{color:#666;font-size:12px;}
+  .kpi {display:flex; gap:10px; margin-top:8px; flex-wrap:wrap;}
+  .kpi .box {background:#f7fbfc;border:1px solid #eef6f8;padding:10px;border-radius:6px;font-size:13px;}
+
+  /* Figuras/placas dos gráficos (substituir src data:) */
+  .figure { display:flex; gap:14px; align-items:flex-start; margin:12px 0; }
+  .figure img { width:320px; height:180px; object-fit:cover; border:1px solid #e6ecee; background:#f3f7f8; }
+  .fig-caption { font-size:12px; color:#444; max-width:360px; }
+
+  /* Comentários visíveis (apenas para desenvolvedor/usuário) */
+  .edit-note { background:#fff3c4; border-left:4px solid #ffda6b; padding:8px 10px; font-size:12px; margin:8px 0; color:#3a2f00; }
+
+  /* Rodapé de página: informações técnicas (visível ao imprimir) */
+  .page-info { font-size:11px; color:#333; margin-top:10px; }
+
+  /* Quando imprimir, force cabeçalho/rodapé nas páginas */
+  @media print {
+    body, .paper { box-shadow:none; margin:0; }
+    header.pdf-header, footer.pdf-footer { position:fixed; }
+    .sheet { padding-top:120px; padding-bottom:110px; }
+  }
+</style>
+</head>
+<body>
+  
+
+  <div class="paper" role="document" aria-label="Documento TB MANAUS — versão HTML fiel">
+    <!-- Cabeçalho extraído do PDF (FIXO e não editável) -->
+    <header class="pdf-header" aria-hidden="true"
+      style="background-image: url('https://drive.google.com/thumbnail?id=1tHWRTkVfoLxMrMqnptBFcJpx8DfvdWFp');">
+      <!-- Substituir o base64 acima pela imagem do cabeçalho extraída do PDF -->
+    </header>
+
+    <!-- Rodapé extraído do PDF (FIXO e não editável) -->
+    <footer class="pdf-footer" aria-hidden="true"
+      style="background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR4nGNgYAAAAAMAASsJTYQAAAAASUVORK5CYII=');">
+      <!-- Substituir o base64 acima pela imagem do rodapé extraída do PDF -->
+    </footer>
+
+    <!-- INÍCIO DO CORPO DO DOCUMENTO (áreas editáveis indicadas) -->
+    <section class="sheet">
+      <!-- TÍTULO FIXO / PODE SER MANTIDO -->
+      <div role="banner" aria-label="Cabeçalho do conteúdo (título)">
+        <h1>TB MANAUS — PANORAMA (2019–2024)</h1>
+        <div class="muted">Relatório técnico extraído do PDF original — cabeçalho e rodapé permanecem fixos.</div>
+      </div>
+
+      <!-- EDITÁVEL: NOME DA CIDADE -->
+      <!-- EDITAR AQUI: alterar o texto abaixo para o nome da cidade -->
+      <div class="edit-note" id="edit-cidade"> <!-- EDITAR AQUI -->
+        <strong>Campo editável:</strong> Nome da cidade: <em id="nome-cidade">Manaus</em>
+      </div>
+
+      <!-- EDITÁVEL: RESUMO EXECUTIVO -->
+      <h2>Resumo Executivo</h2>
+      <!-- EDITAR AQUI: substitua o conteúdo do parágrafo abaixo pelo resumo desejado -->
+      <p id="resumo-executivo"><!-- EDITAR AQUI -->A tuberculose (TB) é um dos principais desafios de Saúde Pública em Manaus. Apesar do tratamento disponível via SUS, a incidência em Manaus permanece acima da média nacional e concentrou-se em territórios com maior vulnerabilidade social. A população economicamente ativa (20–59 anos) e pessoas de raça/cor parda foram as mais afetadas entre 2019 e 2024, com aumento de casos e de óbitos em anos recentes.</p>
+
+      <div class="kpi" aria-hidden="true">
+        <div class="box"><strong>Casos 2024</strong><div class="muted">2.898 novos casos</div></div>
+        <div class="box"><strong>Incidência</strong><div class="muted">127,1 por 100 mil (2024)</div></div>
+        <div class="box"><strong>Óbitos (2023)</strong><div class="muted">131 mortes</div></div>
+      </div>
+
+      <!-- SEÇÃO: Panorama -->
+      <h2>Panorama da tuberculose em Manaus</h2>
+      <!-- EDITAR AQUI: parágrafo principal desta seção -->
+      <p id="par-panorama"><!-- EDITAR AQUI -->Entre 2019 e 2024 os casos novos evoluíram: queda em 2020 (2.055) possivelmente por efeitos da pandemia, seguida por retomada e aumento até 2.898 casos em 2024, o maior valor da série. Paralelamente, os óbitos tiveram leve queda em 2020 e voltaram a subir a partir de 2021.</p>
+
+      <!-- FIGURA 1 (IMAGEM SUBSTITUÍVEL) -->
+      <div class="figure" aria-labelledby="fig1-caption">
+        <!-- EDITAR AQUI: substitua o atributo src pelo base64 da figura 1 extraída do PDF -->
+        <img id="fig1-img" src="https://drive.google.com/thumbnail?id=1tHWRTkVfoLxMrMqnptBFcJpx8DfvdWFp" alt="Figura 1 — Incidência (placeholder)"/>
+        <div class="fig-caption" id="fig1-caption">
+          <strong>Figura 1.</strong>
+          <!-- EDITAR AQUI: legenda/descrição da figura 1 -->
+          <span id="fig1-text"><!-- EDITAR AQUI -->Coeficiente de incidência por 100 mil habitantes e número de casos novos de tuberculose — Manaus (2019–2024).</span>
+        </div>
+      </div>
+
+      <!-- SEÇÃO: Diagnóstico -->
+      <h2>Diagnóstico e confirmação laboratorial</h2>
+      <!-- EDITAR AQUI: parágrafo desta seção -->
+      <p id="par-diagnostico"><!-- EDITAR AQUI -->Houve aumento de confirmações laboratoriais ao longo do período, sugerindo melhora diagnóstica e/ou maior incidência. A maior parte dos testes identificou sensibilidade à rifampicina, embora o relatório aponte também crescimento preocupante de resistência.</p>
+
+      <div class="figure" aria-labelledby="fig7-caption">
+        <!-- EDITAR AQUI: figura 7 -->
+        <img id="fig7-img" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR4nGNgYAAAAAMAASsJTYQAAAAASUVORK5CYII=" alt="Figura 7 (placeholder)"/>
+        <div class="fig-caption" id="fig7-caption">
+          <strong>Figura 7.</strong>
+          <!-- EDITAR AQUI: legenda figura 7 -->
+          <span id="fig7-text"><!-- EDITAR AQUI -->Testes moleculares para diagnóstico — Manaus (2019–2024).</span>
+        </div>
+      </div>
+
+      <div class="figure" aria-labelledby="fig9-caption">
+        <!-- EDITAR AQUI: figura 9 -->
+        <img id="fig9-img" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR4nGNgYAAAAAMAASsJTYQAAAAASUVORK5CYII=" alt="Figura 9 (placeholder)"/>
+        <div class="fig-caption" id="fig9-caption">
+          <strong>Figura 9.</strong>
+          <!-- EDITAR AQUI: legenda figura 9 -->
+          <span id="fig9-text"><!-- EDITAR AQUI -->Resultados de cultura (positivos/negativos) — tendência 2019–2024.</span>
+        </div>
+      </div>
+
+      <!-- SEÇÃO: Perfil sociodemográfico -->
+      <h2>Perfil sociodemográfico</h2>
+      <!-- EDITAR AQUI: parágrafo -->
+      <p id="par-socio"><!-- EDITAR AQUI -->Predominância nos adultos em idade produtiva (20–59 anos) e maior carga entre homens. A população parda foi a mais afetada, com crescimento de 2.556 casos em 2019 para 3.712 em 2024.</p>
+
+      <div class="figure" aria-labelledby="fig3-caption">
+        <!-- EDITAR AQUI: figura 3 -->
+        <img id="fig3-img" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR4nGNgYAAAAAMAASsJTYQAAAAASUVORK5CYII=" alt="Figura 3 (placeholder)"/>
+        <div class="fig-caption" id="fig3-caption">
+          <strong>Figura 3.</strong>
+          <!-- EDITAR AQUI: legenda figura 3 -->
+          <span id="fig3-text"><!-- EDITAR AQUI -->Distribuição dos casos por raça/cor — Manaus (2019–2024).</span>
+        </div>
+      </div>
+
+      <!-- SEÇÃO: Vulnerabilidade -->
+      <h2>Grupos vulneráveis</h2>
+      <!-- EDITAR AQUI: parágrafo -->
+      <p id="par-vuln"><!-- EDITAR AQUI -->A maior parte dos casos entre populações vulneráveis ocorreu em pessoas vivendo com HIV (crescimento de 485 casos em 2019 para 656 em 2024). A população em situação de rua também apresentou aumento.</p>
+
+      <div class="figure" aria-labelledby="fig6-caption">
+        <!-- EDITAR AQUI: figura 6 -->
+        <img id="fig6-img" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR4nGNgYAAAAAMAASsJTYQAAAAASUVORK5CYII=" alt="Figura 6 (placeholder)"/>
+        <div class="fig-caption" id="fig6-caption">
+          <strong>Figura 6.</strong>
+          <!-- EDITAR AQUI: legenda figura 6 -->
+          <span id="fig6-text"><!-- EDITAR AQUI -->Casos e risco entre populações em maior vulnerabilidade — Manaus (2019–2024).</span>
+        </div>
+      </div>
+
+      <!-- SEÇÃO: Tratamento -->
+      <h2>Tratamento — adesão e desfechos</h2>
+      <!-- EDITAR AQUI: parágrafo -->
+      <p id="par-trat"><!-- EDITAR AQUI -->O relatório mostra variações anuais na adesão: nos primeiros anos a maioria dos casos notificados não iniciou tratamento. Houve queda na porcentagem de curas e aumento das taxas de abandono e óbito.</p>
+
+      <div class="figure" aria-labelledby="fig10-caption">
+        <!-- EDITAR AQUI: figura 10 -->
+        <img id="fig10-img" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR4nGNgYAAAAAMAASsJTYQAAAAASUVORK5CYII=" alt="Figura 10 (placeholder)"/>
+        <div class="fig-caption" id="fig10-caption">
+          <strong>Figura 10.</strong>
+          <!-- EDITAR AQUI: legenda figura 10 -->
+          <span id="fig10-text"><!-- EDITAR AQUI -->Tratamento diretamente observado — Manaus (2019–2024).</span>
+        </div>
+      </div>
+
+      <!-- CONCLUSÕES -->
+      <h2>Conclusões e recomendações</h2>
+      <ul>
+        <li>Fortalecer a busca ativa de casos e diagnóstico precoce.</li>
+        <li>Ampliar ações intersetoriais para redução de iniquidades.</li>
+        <li>Reforçar estratégias de adesão e acompanhamento do tratamento.</li>
+        <li>Monitorar resistência e ampliar capacidade laboratorial.</li>
+      </ul>
+
+      <div class="page-info muted">
+        <strong>Referência:</strong> Relatório "TB MANAUS" — Policy Brief. Este HTML replica o layout; cabeçalhos e rodapés são imagens fixas (não editáveis).
+      </div>
+    </section>
+  </div>
+</body>
+</html>
