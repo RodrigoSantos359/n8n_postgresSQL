@@ -1,3 +1,4 @@
+version: '3.3'
 
 services:
   postgres:
@@ -32,7 +33,7 @@ services:
       - appnet
 
   n8n:
-    image: n8nio/n8n:2.2.4
+    image: n8nio/n8n
     container_name: n8n
     restart: always
     ports:
@@ -94,7 +95,4 @@ services:
 volumes:
   postgres_data:
   n8n_data:
-
-networks:
-  appnet:
-    driver: bridge
+# test
