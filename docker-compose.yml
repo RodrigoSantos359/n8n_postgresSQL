@@ -1,68 +1,105 @@
 services:
   postgres:
-    image: postgres:16
+    image: postgres:16-alpine
     container_name: postgres_n8n
-    restart: always
-    ports:
-      - "5432:5432"
+    restart: unless-stopped
     environment:
       POSTGRES_USER: n8n
       POSTGRES_PASSWORD: n8npass
       POSTGRES_DB: n8n
+      TZ: America/Sao_Paulo
+    ports:
+      - "5432:5432"
     volumes:
       - postgres_data:/var/lib/postgresql/data
     networks:
       - appnet
-  
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U n8n -d n8n"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
   mariadb:
     image: mariadb:10.6
     container_name: mariadb
-    restart: always
+    restart: unless-stopped
     environment:
-      - MYSQL_ROOT_PASSWORD=root
-      - MYSQL_DATABASE=reforma_tributaria_consumo
-      - MYSQL_USER=user
-      - MYSQL_PASSWORD=pass
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: nome_do_banco
+      MYSQL_USER: user
+      MYSQL_PASSWORD: pass
+      TZ: America/Sao_Paulo
     ports:
       - "3306:3306"
     volumes:
-      - .data/mariadb:/var/lib/mysql
+      - mariadb_data:/var/lib/mysql
     networks:
       - appnet
+    healthcheck:
+      test: ["CMD", "healthcheck.sh", "--connect", "--innodb_initialized"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
 
   n8n:
-    image: n8nio/n8n
+    image: docker.n8n.io/n8nio/n8n:latest
     container_name: n8n
-    restart: always
+    restart: unless-stopped
     ports:
       - "5678:5678"
     environment:
-      - DB_TYPE=postgres
-      - DB_POSTGRES_HOST=postgres
-      - DB_POSTGRES_PORT=5432
-      - DB_POSTGRES_DATABASE=n8n
-      - DB_POSTGRES_USER=n8n
-      - DB_POSTGRES_PASSWORD=n8npass
-      - N8N_BASIC_AUTH_ACTIVE=true
-      - N8N_BASIC_AUTH_USER=admin
-      - N8N_BASIC_AUTH_PASSWORD=admin123
-      - N8N_TUNNEL_SUBDOMAIN=rodrigon8n
-      - WEBHOOK_TUNNEL_URL=https://rodrigon8n.hooks.n8n.cloud
-      - N8N_STIRLING_PDF_URL=http://stirling-pdf:8080
-      - DB_MARIADB_HOST=mariadb
-      - DB_MARIADB_PORT=3306
-      - DB_MARIADB_DATABASE=reforma_tributaria_consumo
-      - DB_MARIADB_USER=user
-      - DB_MARIADB_PASSWORD=pass
-      
+      TZ: America/Sao_Paulo
+
+      # Banco PostgreSQL
+      DB_TYPE: postgresdb
+      DB_POSTGRESDB_HOST: postgres
+      DB_POSTGRESDB_PORT: 5432
+      DB_POSTGRESDB_DATABASE: n8n
+      DB_POSTGRESDB_USER: n8n
+      DB_POSTGRESDB_PASSWORD: n8npass
+
+      # Auth n8n
+      N8N_BASIC_AUTH_ACTIVE: "true"
+      N8N_BASIC_AUTH_USER: admin
+      N8N_BASIC_AUTH_PASSWORD: admin123
+
+      # Tunnel
+      N8N_TUNNEL_SUBDOMAIN: rodrigon8n
+      WEBHOOK_TUNNEL_URL: https://rodrigon8n.hooks.n8n.cloud
+
+
+      # Variáveis MariaDB
+      DB_MARIADB_HOST: mariadb
+      DB_MARIADB_PORT: 3306
+      DB_MARIADB_DATABASE: nome_do_banco
+      DB_MARIADB_USER: user
+      DB_MARIADB_PASSWORD: pass
+
+      # Configurações extras recomendadas
+      N8N_HOST: localhost
+      N8N_PORT: 5678
+      N8N_PROTOCOL: http
+      NODE_ENV: production
+      GENERIC_TIMEZONE: America/Sao_Paulo
+
     depends_on:
-      - postgres
+      postgres:
+        condition: service_healthy
+      mariadb:
+        condition: service_healthy
+
     volumes:
       - n8n_data:/home/node/.n8n
+
     networks:
       - appnet
 
+networks:
+  appnet:
+    driver: bridge
 
 volumes:
   postgres_data:
+  mariadb_data:
   n8n_data:
